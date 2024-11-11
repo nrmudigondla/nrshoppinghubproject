@@ -15,7 +15,8 @@ namespace API.Extensions
         {
             services.AddDbContext<AppIdentityDbContext>(opt =>
             {
-                opt.UseNpgsql(config.GetConnectionString("IdentityConnection"));
+                opt.UseMySql(config.GetConnectionString("IdentityConnection"),
+                    ServerVersion.AutoDetect(config.GetConnectionString("IdentityConnection")));
             });
 
             services.AddIdentityCore<AppUser>(opt => 

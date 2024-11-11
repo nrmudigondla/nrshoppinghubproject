@@ -17,7 +17,8 @@ namespace API.Extensions
             services.AddSingleton<IResponseCacheService, ResponseCacheService>();
             services.AddDbContext<StoreContext>(opt =>
             {
-                opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+                opt.UseMySql(config.GetConnectionString("DefaultConnection"), 
+                    ServerVersion.AutoDetect(config.GetConnectionString("DefaultConnection")));
             });
             services.AddSingleton<IConnectionMultiplexer>(c => 
             {
